@@ -20,7 +20,7 @@ mongoose.connect(process.env.DB_CONNECTION, () =>
   console.log("connected to mongo")
 );
 
-const IncidentModal = mongoose.model("IncidentReport");
+const IncidentModel = mongoose.model("IncidentReport");
 
 const url = ["https://polisen.se/api/events"];
 
@@ -32,7 +32,7 @@ url.map(async (url) => {
     const json = await response.json();
     resultData = [...json];
     for (let i = 0; i < resultData.length; i++) {
-      let incident = new IncidentModal({
+      let incident = new IncidentModel({
         datetime: resultData[i].datetime,
         name: resultData[i].name,
         summary: resultData[i].summary,
@@ -43,7 +43,7 @@ url.map(async (url) => {
         },
       });
 
-      IncidentModal.findOne({ datetime: incident.datetime }).then(
+      IncidentModel.findOne({ datetime: incident.datetime }).then(
         (existingIncident) => {
           if (existingIncident) {
           } else {

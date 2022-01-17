@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Incident = require("./modals/IncidentModal");
+const Incident = require("./modals/IncidentModel");
 
 router.get("/", (req, res) => {
   res.send("We are on incidents");
