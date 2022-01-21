@@ -16,8 +16,9 @@ const incidentsRoute = require("./incidents");
 app.use("/incidents", incidentsRoute);
 
 //Connect to DB
-mongoose.connect(process.env.DB_CONNECTION, () =>
-  console.log("connected to mongo")
+mongoose.connect(
+  "mongodb+srv://safesverige:Stockholm33@cluster0.ahxkj.mongodb.net/Safesverigedb?retryWrites=true&w=majority",
+  () => console.log("connected to mongo")
 );
 
 const IncidentModel = mongoose.model("IncidentReport");
