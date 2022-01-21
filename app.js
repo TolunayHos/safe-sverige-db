@@ -19,7 +19,7 @@ app.use("/incidents", incidentsRoute);
 mongoose
   .connect(process.env.DB_CONNECTION)
   .then(() => console.log("Connected to db"))
-  .fetch((e) => console.log("Error while connecting to db: " + e));
+  .catch((e) => console.log("Error while connecting to db: " + e));
 
 const IncidentModel = mongoose.model("IncidentReport");
 
