@@ -16,10 +16,10 @@ const incidentsRoute = require("./incidents");
 app.use("/incidents", incidentsRoute);
 
 //Connect to DB
-mongoose.connect(
-  "mongodb+srv://safesverige:Stockholm33@cluster0.ahxkj.mongodb.net/Safesverigedb?retryWrites=true&w=majority",
-  () => console.log("connected to mongo")
-);
+mongoose
+  .connect(process.env.DB_CONNECTION)
+  .then(() => console.log("Connected to db"))
+  .fetch((e) => console.log("Error while connecting to db: " + e));
 
 const IncidentModel = mongoose.model("IncidentReport");
 
@@ -29,6 +29,7 @@ let resultData;
 
 url.map(async (url) => {
   try {
+    console.log("Fetching data from Polisen API...");
     const response = await fetch(url);
     const json = await response.json();
     resultData = [...json];
