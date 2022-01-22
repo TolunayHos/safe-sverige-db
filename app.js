@@ -12,6 +12,14 @@ app.use(bodyParser.json());
 const incidentsRoute = require("./incidents");
 // const IncidentModal = require("./modals/IncidentModal");
 
+var cors = require("cors");
+app.use(
+  cors({
+    credentials: true,
+    optionSuccessStatus: 200,
+  })
+);
+
 //Routes
 app.use("/incidents", incidentsRoute);
 
@@ -30,9 +38,7 @@ let resultData;
 url.map(async (url) => {
   try {
     console.log("Fetching data from Polisen API...");
-    const response = await fetch(url).then(() =>
-      console.log("Got data from Polisen API")
-    );
+    const response = await fetch(url);
     const json = await response.json();
     resultData = [...json];
     for (let i = 0; i < resultData.length; i++) {
