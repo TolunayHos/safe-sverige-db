@@ -4,12 +4,55 @@ const Incident = require("./modals/IncidentModel");
 const mongoose = require("mongoose");
 
 const IncidentModel = mongoose.model("IncidentReport");
+const INCLUDED_TYPES = [
+  "Misshandel",
+  "Försvunnen person",
+  "Mord/dråp, försök",
+  "Olaga hot",
+  "Bedrägeri",
+  "Rattfylleri",
+  "Inbrott",
+  "Stöld",
+  "Narkotikabrott",
+  "Anträffad död",
+  "Åldringsbrott",
+  "Mord",
+  "Skadegörelse",
+  "Skottlossning",
+  "Rån",
+  "Våld",
+  "Ofredande",
+  "Vapenlagen",
+  "Utlänningslagen",
+];
+
+const filterIncidentsBasedOnType = (incidents) => {
+  return incidents.filter((incident) => {
+    return INCLUDED_TYPES.some((type) => incident.type.includes(type));
+  });
+};
+
+const findLastReported = (incidents, city) => {
+  return incidents
+    .filter((incident) => {
+      return incident.location.name === city;
+    })
+    .slice(-5);
+};
 
 router.get("/", (req, res) => {
   IncidentModel.find((err, incidents) => {
     if (!err) {
       res.json({
-        data: incidents,
+        incidents: filterIncidentsBasedOnType(incidents),
+        stockholm: {
+          lastReported: findLastReported(incidents, "Stockholm"),
+          safetyIndex: 7,
+        },
+        uppsala: {
+          lastReported: findLastReported(incidents, "Uppsala"),
+          safetyIndex: 7,
+        },
       });
     } else {
       console.log("failed to retrieve");
