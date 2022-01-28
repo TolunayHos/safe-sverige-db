@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Incident = require("./modals/IncidentModel");
 const mongoose = require("mongoose");
+const cities = require("./clusters");
 
 const IncidentModel = mongoose.model("IncidentReport");
 const INCLUDED_TYPES = [
@@ -35,7 +36,7 @@ const filterIncidentsBasedOnType = (incidents) => {
 const findLastReported = (incidents, city) => {
   return incidents
     .filter((incident) => {
-      return incident.location.name === city;
+      return cities.get(city)?.some((c) => incident.location.name === c);
     })
     .slice(-5);
 };
