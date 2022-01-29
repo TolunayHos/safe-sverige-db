@@ -55,7 +55,7 @@ const incidentSummary = (incidents, city) => {
     const numberOfIncidents = incidentSum.get(incident.type);
     incidentSum.set(
       incident.type,
-      numberOfIncidents === undefined ? 0 : numberOfIncidents + 1
+      numberOfIncidents === undefined ? 1 : numberOfIncidents + 1
     );
   });
 
@@ -78,147 +78,149 @@ router.get("/", (req, res) => {
     if (!err) {
       res.json({
         incidents: filterIncidentsBasedOnType(incidents),
-        stockholm: {
-          lastReported: findLastReported(incidents, "Stockholm"),
-          safetyIndex: 7,
-          incidentSum: incidentSummary(incidents, "Stockholm"),
-          incidentsPer: Math.trunc(
-            findReportedBasedOnCity(incidents, "Stockholm").length / 23
-          ),
-        },
-        blekinge: {
-          lastReported: findLastReported(incidents, "Blekinge"),
-          safetyIndex: 7,
-          incidentSum: incidentSummary(incidents, "Blekinge"),
-          incidentsPer: Math.trunc(
-            findReportedBasedOnCity(incidents, "Blekinge").length / 1.6
-          ),
-        },
-        dalarna: {
-          lastReported: findLastReported(incidents, "Dalarna"),
-          safetyIndex: 7,
-          incidentsPer: Math.trunc(
-            findReportedBasedOnCity(incidents, "Dalarna").length / 2.9
-          ),
-        },
-        gävleborg: {
-          lastReported: findLastReported(incidents, "Gävleborg"),
-          safetyIndex: 7,
-          incidentsPer: Math.trunc(
-            findReportedBasedOnCity(incidents, "Gävleborg").length / 2.85
-          ),
-        },
-        halland: {
-          lastReported: findLastReported(incidents, "Halland"),
-          safetyIndex: 7,
-          incidentsPer: Math.trunc(
-            findReportedBasedOnCity(incidents, "Halland").length / 3.3
-          ),
-        },
-        jämtland: {
-          lastReported: findLastReported(incidents, "Jämtland"),
-          safetyIndex: 7,
-          incidentsPer: Math.trunc(
-            findReportedBasedOnCity(incidents, "Jämtland").length / 1.3
-          ),
-        },
-        jönköping: {
-          lastReported: findLastReported(incidents, "Jönköping"),
-          safetyIndex: 7,
-          incidentsPer: Math.trunc(
-            findReportedBasedOnCity(incidents, "Jönköping").length / 0.93
-          ),
-        },
-        kalmar: {
-          lastReported: findLastReported(incidents, "Kalmar"),
-          safetyIndex: 7,
-          incidentsPer: Math.trunc(
-            findReportedBasedOnCity(incidents, "Kalmar").length / 0.36
-          ),
-        },
-        kronoberg: {
-          lastReported: findLastReported(incidents, "Kronoberg"),
-          safetyIndex: 7,
-          incidentsPer: Math.trunc(
-            findReportedBasedOnCity(incidents, "Kronoberg").length / 2
-          ),
-        },
-        norrbotten: {
-          lastReported: findLastReported(incidents, "Norrbotten"),
-          safetyIndex: 7,
-          incidentsPer: Math.trunc(
-            findReportedBasedOnCity(incidents, "Norrbotten").length / 2.5
-          ),
-        },
-        skåne: {
-          lastReported: findLastReported(incidents, "Skåne"),
-          safetyIndex: 7,
-          incidentsPer: Math.trunc(
-            findReportedBasedOnCity(incidents, "Skåne").length / 13
-          ),
-        },
-        södermanland: {
-          lastReported: findLastReported(incidents, "Södermanland"),
-          safetyIndex: 7,
-          incidentsPer: Math.trunc(
-            findReportedBasedOnCity(incidents, "Södermanland").length / 2.9
-          ),
-        },
-        uppsala: {
-          lastReported: findLastReported(incidents, "Uppsala"),
-          safetyIndex: 7,
-          incidentsPer: Math.trunc(
-            findReportedBasedOnCity(incidents, "Uppsala").length / 3.8
-          ),
-        },
-        värmland: {
-          lastReported: findLastReported(incidents, "Värmland"),
-          safetyIndex: 7,
-          incidentsPer: Math.trunc(
-            findReportedBasedOnCity(incidents, "Värmland").length / 2.8
-          ),
-        },
-        västerbotten: {
-          lastReported: findLastReported(incidents, "Västerbotten"),
-          safetyIndex: 7,
-          incidentsPer: Math.trunc(
-            findReportedBasedOnCity(incidents, "Västerbotten").length / 2.6
-          ),
-        },
-        västernorrland: {
-          lastReported: findLastReported(incidents, "Västernorrland"),
-          safetyIndex: 7,
-          incidentsPer: Math.trunc(
-            findReportedBasedOnCity(incidents, "Västernorrland").length / 2.4
-          ),
-        },
-        västmanland: {
-          lastReported: findLastReported(incidents, "Västmanland"),
-          safetyIndex: 7,
-          incidentsPer: Math.trunc(
-            findReportedBasedOnCity(incidents, "Västmanland").length / 2.7
-          ),
-        },
-        västraGötaland: {
-          lastReported: findLastReported(incidents, "Västra Götaland"),
-          safetyIndex: 7,
-          incidentsPer: Math.trunc(
-            findReportedBasedOnCity(incidents, "Västra Götaland").length / 17
-          ),
-        },
-        örebro: {
-          lastReported: findLastReported(incidents, "Örebro"),
-          safetyIndex: 7,
-          incidentsPer: Math.trunc(
-            findReportedBasedOnCity(incidents, "Örebro").length / 3
-          ),
-        },
-        östergötland: {
-          lastReported: findLastReported(incidents, "Östergötland"),
-          safetyIndex: 7,
-          incidentsPer: Math.trunc(
-            findReportedBasedOnCity(incidents, "Östergötland").length / 4.5
-          ),
+        citySummary: {
+          stockholm: {
+            lastReported: findLastReported(incidents, "Stockholm"),
+            safetyIndex: 7,
+            incidentSum: incidentSummary(incidents, "Stockholm"),
+            incidentsPer: Math.trunc(
+              findReportedBasedOnCity(incidents, "Stockholm").length / 23
+            ),
+          },
+          blekinge: {
+            lastReported: findLastReported(incidents, "Blekinge"),
+            safetyIndex: 7,
+            incidentSum: incidentSummary(incidents, "Blekinge"),
+            incidentsPer: Math.trunc(
+              findReportedBasedOnCity(incidents, "Blekinge").length / 1.6
+            ),
+          },
+          dalarna: {
+            lastReported: findLastReported(incidents, "Dalarna"),
+            safetyIndex: 7,
+            incidentsPer: Math.trunc(
+              findReportedBasedOnCity(incidents, "Dalarna").length / 2.9
+            ),
+          },
+          gävleborg: {
+            lastReported: findLastReported(incidents, "Gävleborg"),
+            safetyIndex: 7,
+            incidentsPer: Math.trunc(
+              findReportedBasedOnCity(incidents, "Gävleborg").length / 2.85
+            ),
+          },
+          halland: {
+            lastReported: findLastReported(incidents, "Halland"),
+            safetyIndex: 7,
+            incidentsPer: Math.trunc(
+              findReportedBasedOnCity(incidents, "Halland").length / 3.3
+            ),
+          },
+          jämtland: {
+            lastReported: findLastReported(incidents, "Jämtland"),
+            safetyIndex: 7,
+            incidentsPer: Math.trunc(
+              findReportedBasedOnCity(incidents, "Jämtland").length / 1.3
+            ),
+          },
+          jönköping: {
+            lastReported: findLastReported(incidents, "Jönköping"),
+            safetyIndex: 7,
+            incidentsPer: Math.trunc(
+              findReportedBasedOnCity(incidents, "Jönköping").length / 0.93
+            ),
+          },
+          kalmar: {
+            lastReported: findLastReported(incidents, "Kalmar"),
+            safetyIndex: 7,
+            incidentsPer: Math.trunc(
+              findReportedBasedOnCity(incidents, "Kalmar").length / 0.36
+            ),
+          },
+          kronoberg: {
+            lastReported: findLastReported(incidents, "Kronoberg"),
+            safetyIndex: 7,
+            incidentsPer: Math.trunc(
+              findReportedBasedOnCity(incidents, "Kronoberg").length / 2
+            ),
+          },
+          norrbotten: {
+            lastReported: findLastReported(incidents, "Norrbotten"),
+            safetyIndex: 7,
+            incidentsPer: Math.trunc(
+              findReportedBasedOnCity(incidents, "Norrbotten").length / 2.5
+            ),
+          },
+          skåne: {
+            lastReported: findLastReported(incidents, "Skåne"),
+            safetyIndex: 7,
+            incidentsPer: Math.trunc(
+              findReportedBasedOnCity(incidents, "Skåne").length / 13
+            ),
+          },
+          södermanland: {
+            lastReported: findLastReported(incidents, "Södermanland"),
+            safetyIndex: 7,
+            incidentsPer: Math.trunc(
+              findReportedBasedOnCity(incidents, "Södermanland").length / 2.9
+            ),
+          },
+          uppsala: {
+            lastReported: findLastReported(incidents, "Uppsala"),
+            safetyIndex: 7,
+            incidentsPer: Math.trunc(
+              findReportedBasedOnCity(incidents, "Uppsala").length / 3.8
+            ),
+          },
+          värmland: {
+            lastReported: findLastReported(incidents, "Värmland"),
+            safetyIndex: 7,
+            incidentsPer: Math.trunc(
+              findReportedBasedOnCity(incidents, "Värmland").length / 2.8
+            ),
+          },
+          västerbotten: {
+            lastReported: findLastReported(incidents, "Västerbotten"),
+            safetyIndex: 7,
+            incidentsPer: Math.trunc(
+              findReportedBasedOnCity(incidents, "Västerbotten").length / 2.6
+            ),
+          },
+          västernorrland: {
+            lastReported: findLastReported(incidents, "Västernorrland"),
+            safetyIndex: 7,
+            incidentsPer: Math.trunc(
+              findReportedBasedOnCity(incidents, "Västernorrland").length / 2.4
+            ),
+          },
+          västmanland: {
+            lastReported: findLastReported(incidents, "Västmanland"),
+            safetyIndex: 7,
+            incidentsPer: Math.trunc(
+              findReportedBasedOnCity(incidents, "Västmanland").length / 2.7
+            ),
+          },
+          västraGötaland: {
+            lastReported: findLastReported(incidents, "Västra Götaland"),
+            safetyIndex: 7,
+            incidentsPer: Math.trunc(
+              findReportedBasedOnCity(incidents, "Västra Götaland").length / 17
+            ),
+          },
+          örebro: {
+            lastReported: findLastReported(incidents, "Örebro"),
+            safetyIndex: 7,
+            incidentsPer: Math.trunc(
+              findReportedBasedOnCity(incidents, "Örebro").length / 3
+            ),
+          },
+          östergötland: {
+            lastReported: findLastReported(incidents, "Östergötland"),
+            safetyIndex: 7,
+            incidentsPer: Math.trunc(
+              findReportedBasedOnCity(incidents, "Östergötland").length / 4.5
+            ),
+          },
         },
       });
     } else {
