@@ -289,7 +289,7 @@ cities.set("Örebro", [
   "Nora",
   "Örebro",
 ]);
-cities.set("Örebro", [
+cities.set("Östergötland", [
   "Åtvidaberg",
   "Boxholm",
   "Finspång",
