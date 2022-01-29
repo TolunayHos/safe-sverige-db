@@ -96,21 +96,7 @@ cities.set("Jönköping", [
   "Värnamo",
   "Vetlanda",
 ]);
-cities.set("Jönköping", [
-  "Aneby",
-  "Eksjö",
-  "Gislaved",
-  "Gnosjö",
-  "Habo",
-  "Jönköping",
-  "Mullsjö",
-  "Nässjö",
-  "Sävsjö",
-  "Tranås",
-  "Vaggeryd",
-  "Värnamo",
-  "Vetlanda",
-]);
+
 cities.set("Kalmar", ["Kalmar"]);
 cities.set("Kronoberg", [
   "Älmhult",
@@ -176,6 +162,17 @@ cities.set("Skåne", [
   "Trelleborg",
   "Vellinge",
   "Ystad",
+]);
+cities.set("Södermanland", [
+  "Eskilstuna",
+  "Flen",
+  "Gnesta",
+  "Katrineholm",
+  "Nyköping",
+  "Oxelösund",
+  "Strängnäs",
+  "Trosa",
+  "Vingåker",
 ]);
 cities.set("Uppsala", [
   "Älvkarleby",
@@ -243,18 +240,7 @@ cities.set("Västmanland", [
   "Surahammar",
   "Västerås",
 ]);
-cities.set("Västmanland", [
-  "Arboga",
-  "Fagersta",
-  "Hallstahammar",
-  "Köping",
-  "Kungsör",
-  "Norberg",
-  "Sala",
-  "Skinnskatteberg",
-  "Surahammar",
-  "Västerås",
-]);
+
 cities.set("Västra Götaland", [
   "Alingsås",
   "Borås",
