@@ -73,13 +73,44 @@ const incidentSummary = (incidents, city) => {
   return mostFrequentIncidents;
 };
 
+const mostReportingCities = (incidents, city) => {
+  let incidentsPerCity = new Map();
+  let incidentsArr = findReportedBasedOnCity(
+    filterIncidentsBasedOnType(incidents),
+    city
+  );
+
+  incidentsArr.map((incident) => {
+    const numberOfIncidents = incidentsPerCity.get(incident.location.name);
+    incidentsPerCity.set(
+      incident.location.name,
+      numberOfIncidents === undefined ? 1 : numberOfIncidents + 1
+    );
+  });
+
+  const sortedIncidents = [...incidentsPerCity.entries()].sort(
+    (a, b) => b[1] - a[1]
+  );
+
+  let mostFrequentCities = [];
+  for (let i = 0; i < Math.min(sortedIncidents.length, 20); i++) {
+    mostFrequentCities.push({
+      city: sortedIncidents[i][0],
+      numberOfIncidents: sortedIncidents[i][1],
+    });
+  }
+  return mostFrequentCities;
+};
+
 router.get("/", (req, res) => {
   IncidentModel.find((err, incidents) => {
     if (!err) {
       res.json({
         incidents: filterIncidentsBasedOnType(incidents),
+
         citySummary: {
           stockholm: {
+            topReportingCities: mostReportingCities(incidents, "Stockholm"),
             lastReported: findLastReported(incidents, "Stockholm"),
             safetyIndex: 7,
             incidentSum: incidentSummary(
@@ -91,6 +122,8 @@ router.get("/", (req, res) => {
             ),
           },
           blekinge: {
+            topReportingCities: mostReportingCities(incidents, "Blekinge"),
+
             lastReported: findLastReported(incidents, "Blekinge"),
             safetyIndex: 7,
             incidentSum: incidentSummary(
@@ -102,6 +135,8 @@ router.get("/", (req, res) => {
             ),
           },
           dalarna: {
+            topReportingCities: mostReportingCities(incidents, "Dalarna"),
+
             lastReported: findLastReported(incidents, "Dalarna"),
             safetyIndex: 7,
             incidentSum: incidentSummary(
@@ -113,6 +148,8 @@ router.get("/", (req, res) => {
             ),
           },
           gävleborg: {
+            topReportingCities: mostReportingCities(incidents, "Gävleborg"),
+
             lastReported: findLastReported(incidents, "Gävleborg"),
             safetyIndex: 7,
             incidentSum: incidentSummary(
@@ -125,6 +162,8 @@ router.get("/", (req, res) => {
             ),
           },
           halland: {
+            topReportingCities: mostReportingCities(incidents, "Halland"),
+
             lastReported: findLastReported(incidents, "Halland"),
             safetyIndex: 7,
             incidentSum: incidentSummary(
@@ -137,6 +176,8 @@ router.get("/", (req, res) => {
             ),
           },
           jämtland: {
+            topReportingCities: mostReportingCities(incidents, "Jämtland"),
+
             lastReported: findLastReported(incidents, "Jämtland"),
             safetyIndex: 7,
             incidentSum: incidentSummary(
@@ -149,6 +190,8 @@ router.get("/", (req, res) => {
             ),
           },
           jönköping: {
+            topReportingCities: mostReportingCities(incidents, "Jönköping"),
+
             lastReported: findLastReported(incidents, "Jönköping"),
             safetyIndex: 7,
             incidentSum: incidentSummary(
@@ -161,6 +204,8 @@ router.get("/", (req, res) => {
             ),
           },
           kalmar: {
+            topReportingCities: mostReportingCities(incidents, "Kalmar"),
+
             lastReported: findLastReported(incidents, "Kalmar"),
             safetyIndex: 7,
             incidentSum: incidentSummary(
@@ -173,6 +218,8 @@ router.get("/", (req, res) => {
             ),
           },
           kronoberg: {
+            topReportingCities: mostReportingCities(incidents, "Kronoberg"),
+
             lastReported: findLastReported(incidents, "Kronoberg"),
             safetyIndex: 7,
             incidentSum: incidentSummary(
@@ -185,6 +232,8 @@ router.get("/", (req, res) => {
             ),
           },
           norrbotten: {
+            topReportingCities: mostReportingCities(incidents, "Norrbotten"),
+
             lastReported: findLastReported(incidents, "Norrbotten"),
             safetyIndex: 7,
             incidentSum: incidentSummary(
@@ -197,6 +246,8 @@ router.get("/", (req, res) => {
             ),
           },
           skåne: {
+            topReportingCities: mostReportingCities(incidents, "Skåne"),
+
             lastReported: findLastReported(incidents, "Skåne"),
             safetyIndex: 7,
             incidentSum: incidentSummary(
@@ -209,6 +260,8 @@ router.get("/", (req, res) => {
             ),
           },
           södermanland: {
+            topReportingCities: mostReportingCities(incidents, "Södermanland"),
+
             lastReported: findLastReported(incidents, "Södermanland"),
             safetyIndex: 7,
             incidentSum: incidentSummary(
@@ -221,6 +274,8 @@ router.get("/", (req, res) => {
             ),
           },
           uppsala: {
+            topReportingCities: mostReportingCities(incidents, "Uppsala"),
+
             lastReported: findLastReported(incidents, "Uppsala"),
             safetyIndex: 7,
             incidentSum: incidentSummary(
@@ -233,6 +288,8 @@ router.get("/", (req, res) => {
             ),
           },
           värmland: {
+            topReportingCities: mostReportingCities(incidents, "Värmland"),
+
             lastReported: findLastReported(incidents, "Värmland"),
             safetyIndex: 7,
             incidentSum: incidentSummary(
@@ -245,6 +302,8 @@ router.get("/", (req, res) => {
             ),
           },
           västerbotten: {
+            topReportingCities: mostReportingCities(incidents, "Västerbotten"),
+
             lastReported: findLastReported(incidents, "Västerbotten"),
             safetyIndex: 7,
             incidentSum: incidentSummary(
@@ -257,6 +316,11 @@ router.get("/", (req, res) => {
             ),
           },
           västernorrland: {
+            topReportingCities: mostReportingCities(
+              incidents,
+              "Västernorrland"
+            ),
+
             lastReported: findLastReported(incidents, "Västernorrland"),
             safetyIndex: 7,
             incidentSum: incidentSummary(
@@ -269,6 +333,8 @@ router.get("/", (req, res) => {
             ),
           },
           västmanland: {
+            topReportingCities: mostReportingCities(incidents, "Västmanland"),
+
             lastReported: findLastReported(incidents, "Västmanland"),
             safetyIndex: 7,
             incidentSum: incidentSummary(
@@ -281,6 +347,11 @@ router.get("/", (req, res) => {
             ),
           },
           västraGötaland: {
+            topReportingCities: mostReportingCities(
+              incidents,
+              "Västra Götaland"
+            ),
+
             lastReported: findLastReported(incidents, "Västra Götaland"),
             safetyIndex: 7,
             incidentSum: incidentSummary(
@@ -293,6 +364,8 @@ router.get("/", (req, res) => {
             ),
           },
           örebro: {
+            topReportingCities: mostReportingCities(incidents, "Örebro"),
+
             lastReported: findLastReported(incidents, "Örebro"),
             safetyIndex: 7,
             incidentSum: incidentSummary(
@@ -305,6 +378,8 @@ router.get("/", (req, res) => {
             ),
           },
           östergötland: {
+            topReportingCities: mostReportingCities(incidents, "Östergötland"),
+
             lastReported: findLastReported(incidents, "Östergötland"),
             safetyIndex: 7,
             incidentSum: incidentSummary(
