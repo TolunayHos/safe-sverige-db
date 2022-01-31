@@ -34,7 +34,7 @@ const filterIncidentsBasedOnType = (incidents) => {
 };
 
 const findLastReported = (incidents, city) => {
-  return incidents
+  return filterIncidentsBasedOnType(incidents)
     .filter((incident) => {
       return cities.get(city)?.some((c) => incident.location.name === c);
     })
@@ -82,7 +82,10 @@ router.get("/", (req, res) => {
           stockholm: {
             lastReported: findLastReported(incidents, "Stockholm"),
             safetyIndex: 7,
-            incidentSum: incidentSummary(incidents, "Stockholm"),
+            incidentSum: incidentSummary(
+              filterIncidentsBasedOnType(incidents),
+              "Stockholm"
+            ),
             incidentsPer: Math.trunc(
               findReportedBasedOnCity(incidents, "Stockholm").length / 23
             ),
@@ -90,7 +93,10 @@ router.get("/", (req, res) => {
           blekinge: {
             lastReported: findLastReported(incidents, "Blekinge"),
             safetyIndex: 7,
-            incidentSum: incidentSummary(incidents, "Blekinge"),
+            incidentSum: incidentSummary(
+              filterIncidentsBasedOnType(incidents),
+              "Blekinge"
+            ),
             incidentsPer: Math.trunc(
               findReportedBasedOnCity(incidents, "Blekinge").length / 1.6
             ),
@@ -98,7 +104,10 @@ router.get("/", (req, res) => {
           dalarna: {
             lastReported: findLastReported(incidents, "Dalarna"),
             safetyIndex: 7,
-            incidentSum: incidentSummary(incidents, "Dalarna"),
+            incidentSum: incidentSummary(
+              filterIncidentsBasedOnType(incidents),
+              "Dalarna"
+            ),
             incidentsPer: Math.trunc(
               findReportedBasedOnCity(incidents, "Dalarna").length / 2.9
             ),
@@ -106,7 +115,10 @@ router.get("/", (req, res) => {
           gävleborg: {
             lastReported: findLastReported(incidents, "Gävleborg"),
             safetyIndex: 7,
-            incidentSum: incidentSummary(incidents, "Gävleborg"),
+            incidentSum: incidentSummary(
+              filterIncidentsBasedOnType(incidents),
+              "Gävleborg"
+            ),
 
             incidentsPer: Math.trunc(
               findReportedBasedOnCity(incidents, "Gävleborg").length / 2.85
@@ -115,7 +127,10 @@ router.get("/", (req, res) => {
           halland: {
             lastReported: findLastReported(incidents, "Halland"),
             safetyIndex: 7,
-            incidentSum: incidentSummary(incidents, "Halland"),
+            incidentSum: incidentSummary(
+              filterIncidentsBasedOnType(incidents),
+              "Halland"
+            ),
 
             incidentsPer: Math.trunc(
               findReportedBasedOnCity(incidents, "Halland").length / 3.3
@@ -124,7 +139,10 @@ router.get("/", (req, res) => {
           jämtland: {
             lastReported: findLastReported(incidents, "Jämtland"),
             safetyIndex: 7,
-            incidentSum: incidentSummary(incidents, "Jämtland"),
+            incidentSum: incidentSummary(
+              filterIncidentsBasedOnType(incidents),
+              "Jämtland"
+            ),
 
             incidentsPer: Math.trunc(
               findReportedBasedOnCity(incidents, "Jämtland").length / 1.3
@@ -133,7 +151,10 @@ router.get("/", (req, res) => {
           jönköping: {
             lastReported: findLastReported(incidents, "Jönköping"),
             safetyIndex: 7,
-            incidentSum: incidentSummary(incidents, "Jönköping"),
+            incidentSum: incidentSummary(
+              filterIncidentsBasedOnType(incidents),
+              "Jönköping"
+            ),
 
             incidentsPer: Math.trunc(
               findReportedBasedOnCity(incidents, "Jönköping").length / 0.93
@@ -142,7 +163,10 @@ router.get("/", (req, res) => {
           kalmar: {
             lastReported: findLastReported(incidents, "Kalmar"),
             safetyIndex: 7,
-            incidentSum: incidentSummary(incidents, "Kalmar"),
+            incidentSum: incidentSummary(
+              filterIncidentsBasedOnType(incidents),
+              "Kalmar"
+            ),
 
             incidentsPer: Math.trunc(
               findReportedBasedOnCity(incidents, "Kalmar").length / 0.36
@@ -151,7 +175,10 @@ router.get("/", (req, res) => {
           kronoberg: {
             lastReported: findLastReported(incidents, "Kronoberg"),
             safetyIndex: 7,
-            incidentSum: incidentSummary(incidents, "Kronoberg"),
+            incidentSum: incidentSummary(
+              filterIncidentsBasedOnType(incidents),
+              "Kronoberg"
+            ),
 
             incidentsPer: Math.trunc(
               findReportedBasedOnCity(incidents, "Kronoberg").length / 2
@@ -160,7 +187,10 @@ router.get("/", (req, res) => {
           norrbotten: {
             lastReported: findLastReported(incidents, "Norrbotten"),
             safetyIndex: 7,
-            incidentSum: incidentSummary(incidents, "Norrbotten"),
+            incidentSum: incidentSummary(
+              filterIncidentsBasedOnType(incidents),
+              "Norrbotten"
+            ),
 
             incidentsPer: Math.trunc(
               findReportedBasedOnCity(incidents, "Norrbotten").length / 2.5
@@ -169,7 +199,10 @@ router.get("/", (req, res) => {
           skåne: {
             lastReported: findLastReported(incidents, "Skåne"),
             safetyIndex: 7,
-            incidentSum: incidentSummary(incidents, "Skåne"),
+            incidentSum: incidentSummary(
+              filterIncidentsBasedOnType(incidents),
+              "Skåne"
+            ),
 
             incidentsPer: Math.trunc(
               findReportedBasedOnCity(incidents, "Skåne").length / 13
@@ -178,7 +211,10 @@ router.get("/", (req, res) => {
           södermanland: {
             lastReported: findLastReported(incidents, "Södermanland"),
             safetyIndex: 7,
-            incidentSum: incidentSummary(incidents, "Södermanland"),
+            incidentSum: incidentSummary(
+              filterIncidentsBasedOnType(incidents),
+              "Södermanland"
+            ),
 
             incidentsPer: Math.trunc(
               findReportedBasedOnCity(incidents, "Södermanland").length / 2.9
@@ -187,7 +223,10 @@ router.get("/", (req, res) => {
           uppsala: {
             lastReported: findLastReported(incidents, "Uppsala"),
             safetyIndex: 7,
-            incidentSum: incidentSummary(incidents, "Uppsala"),
+            incidentSum: incidentSummary(
+              filterIncidentsBasedOnType(incidents),
+              "Uppsala"
+            ),
 
             incidentsPer: Math.trunc(
               findReportedBasedOnCity(incidents, "Uppsala").length / 3.8
@@ -196,7 +235,10 @@ router.get("/", (req, res) => {
           värmland: {
             lastReported: findLastReported(incidents, "Värmland"),
             safetyIndex: 7,
-            incidentSum: incidentSummary(incidents, "Värmland"),
+            incidentSum: incidentSummary(
+              filterIncidentsBasedOnType(incidents),
+              "Värmland"
+            ),
 
             incidentsPer: Math.trunc(
               findReportedBasedOnCity(incidents, "Värmland").length / 2.8
@@ -205,7 +247,10 @@ router.get("/", (req, res) => {
           västerbotten: {
             lastReported: findLastReported(incidents, "Västerbotten"),
             safetyIndex: 7,
-            incidentSum: incidentSummary(incidents, "Västerbotten"),
+            incidentSum: incidentSummary(
+              filterIncidentsBasedOnType(incidents),
+              "Västerbotten"
+            ),
 
             incidentsPer: Math.trunc(
               findReportedBasedOnCity(incidents, "Västerbotten").length / 2.6
@@ -214,7 +259,10 @@ router.get("/", (req, res) => {
           västernorrland: {
             lastReported: findLastReported(incidents, "Västernorrland"),
             safetyIndex: 7,
-            incidentSum: incidentSummary(incidents, "Västernorrland"),
+            incidentSum: incidentSummary(
+              filterIncidentsBasedOnType(incidents),
+              "Västernorrland"
+            ),
 
             incidentsPer: Math.trunc(
               findReportedBasedOnCity(incidents, "Västernorrland").length / 2.4
@@ -223,7 +271,10 @@ router.get("/", (req, res) => {
           västmanland: {
             lastReported: findLastReported(incidents, "Västmanland"),
             safetyIndex: 7,
-            incidentSum: incidentSummary(incidents, "Västmanland"),
+            incidentSum: incidentSummary(
+              filterIncidentsBasedOnType(incidents),
+              "Västmanland"
+            ),
 
             incidentsPer: Math.trunc(
               findReportedBasedOnCity(incidents, "Västmanland").length / 2.7
@@ -232,7 +283,10 @@ router.get("/", (req, res) => {
           västraGötaland: {
             lastReported: findLastReported(incidents, "Västra Götaland"),
             safetyIndex: 7,
-            incidentSum: incidentSummary(incidents, "Västra Götaland"),
+            incidentSum: incidentSummary(
+              filterIncidentsBasedOnType(incidents),
+              "Västra Götaland"
+            ),
 
             incidentsPer: Math.trunc(
               findReportedBasedOnCity(incidents, "Västra Götaland").length / 17
@@ -241,7 +295,10 @@ router.get("/", (req, res) => {
           örebro: {
             lastReported: findLastReported(incidents, "Örebro"),
             safetyIndex: 7,
-            incidentSum: incidentSummary(incidents, "Örebro"),
+            incidentSum: incidentSummary(
+              filterIncidentsBasedOnType(incidents),
+              "Örebro"
+            ),
 
             incidentsPer: Math.trunc(
               findReportedBasedOnCity(incidents, "Örebro").length / 3
@@ -250,7 +307,10 @@ router.get("/", (req, res) => {
           östergötland: {
             lastReported: findLastReported(incidents, "Östergötland"),
             safetyIndex: 7,
-            incidentSum: incidentSummary(incidents, "Östergötland"),
+            incidentSum: incidentSummary(
+              filterIncidentsBasedOnType(incidents),
+              "Östergötland"
+            ),
 
             incidentsPer: Math.trunc(
               findReportedBasedOnCity(incidents, "Östergötland").length / 4.5
