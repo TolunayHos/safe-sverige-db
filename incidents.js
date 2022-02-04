@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Incident = require("./modals/IncidentModel");
 const mongoose = require("mongoose");
-const cities = require("./clusters");
+const cities = require("./cities");
 
 const IncidentModel = mongoose.model("IncidentReport");
 const INCLUDED_TYPES = [
