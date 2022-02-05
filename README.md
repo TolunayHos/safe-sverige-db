@@ -79,6 +79,6 @@ const INCLUDED_TYPES = [
 ];
 ```
 Sweden Safety Backend groups all incidents per county in Sweden. It provides data for the following counties: 
-Stockholm, Blekinge, Dalarna, Gävleborg, Halland, Jämtland, Jönköping, Kalmar, Kronoberg, Norrbotten, Skåne, Södermanland, Uppsala, Värmland, Västerbotten, Västernorrland, Västmanland, Västra Götaland, Örebro, Östergötland
+Stockholm, Blekinge, Dalarna, Gävleborg, Halland, Jämtland, Jönköping, Kalmar, Kronoberg, Norrbotten, Skåne, Södermanland, Uppsala, Värmland, Västerbotten, Västernorrland, Västmanland, Västra Götaland, Örebro, Östergötland (see [cities.js](cities.js))
 
 
