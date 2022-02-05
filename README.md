@@ -1,4 +1,4 @@
-This project is built using Express Node JS. 
+This project is built using Express Node JS. It serves as a backend for [Sweden Safety Map](https://swedensafety.netlify.app/) web application (see the source code: [here](https://github.com/TolunayHos/sweden-safety-map)).
 
 ![Architecture diagram](MapArchitecture.png)
 
