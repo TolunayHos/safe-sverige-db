@@ -2,9 +2,10 @@ This project is built using Express Node JS. It serves as a backend for [Sweden 
 
 ![Architecture diagram](MapArchitecture.png)
 
-Sweden Safety Backend implements a scheduler whose daily task is to fetch incidents data from Polisen API. Polisen exposes data of all incidents that happened in Sweden. Since their response can include maximum 500 results, Sweden Safety Backend has to actively fetch data and store all new incidents that are not already stored in the database. The incidents, fetched from the Polisen API, are stored in MongoDB using Mongoose library.
+Sweden Safety Backend implements a scheduler (agenda js) whose daily task is to fetch incidents data from Polisen API. Polisen exposes data of all incidents that happened in Sweden. Since their response can include maximum 500 results, Sweden Safety Backend has to actively fetch data and store all new incidents that are not already stored in the database. The incidents, fetched from the Polisen API, are stored in MongoDB using Mongoose library.
 
 Sweden Safety Backend exposes an API whose response includes a list of all criminal incidents and incident summaries per county. An example API response can be found below:
+
 ```json
 {
   "incidents": [
@@ -51,10 +52,10 @@ Sweden Safety Backend exposes an API whose response includes a list of all crimi
     }
   }
 }
-
 ```
 
-Sweden Safety Backend filters out noncriminal incidents and provides only data about the following incident types: 
+Sweden Safety Backend filters out noncriminal incidents and provides only data about the following incident types:
+
 ```javascript
 const INCLUDED_TYPES = [
   "Misshandel",
@@ -78,7 +79,6 @@ const INCLUDED_TYPES = [
   "Utlänningslagen",
 ];
 ```
-Sweden Safety Backend groups all incidents per county in Sweden. It provides data for the following counties: 
+
+Sweden Safety Backend groups all incidents per county in Sweden. It provides data for the following counties:
 Stockholm, Blekinge, Dalarna, Gävleborg, Halland, Jämtland, Jönköping, Kalmar, Kronoberg, Norrbotten, Skåne, Södermanland, Uppsala, Värmland, Västerbotten, Västernorrland, Västmanland, Västra Götaland, Örebro, Östergötland (see [cities.js](cities.js))
-
-
