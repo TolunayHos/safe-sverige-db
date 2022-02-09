@@ -53,6 +53,7 @@ Sweden Safety Backend exposes an API whose response includes a list of all crimi
   }
 }
 ```
+See how the API is structured in [incident.js](https://github.com/TolunayHos/sweden-safety-backend/blob/master/incidents.js)
 
 Sweden Safety Backend filters out noncriminal incidents and provides only data about the following incident types:
 
