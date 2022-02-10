@@ -346,7 +346,7 @@ router.get("/", (req, res) => {
               findReportedBasedOnCity(incidents, "Västmanland").length / 2.7
             ),
           },
-          västraGötaland: {
+          västragötaland: {
             topReportingCities: mostReportingCities(
               incidents,
               "Västra Götaland"
