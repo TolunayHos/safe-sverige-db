@@ -41,40 +41,43 @@ const agenda = new Agenda({
   processEvery: "30 seconds",
 });
 
-agenda.define("fetch data from Polisen API and store to db", async (job) =>
-  url.map(async (url) => {
-    try {
-      console.log("Fetching data from Polisen API...");
-      const response = await fetch(url);
-      const json = await response.json();
-      resultData = [...json];
-      for (let i = 0; i < resultData.length; i++) {
-        let incident = new IncidentModel({
-          datetime: resultData[i].datetime,
-          name: resultData[i].name,
-          summary: resultData[i].summary,
-          type: resultData[i].type,
-          location: {
-            name: resultData[i].location.name,
-            gps: resultData[i].location.gps,
-          },
-        });
+agenda.define(
+  "fetch data from Polisen API and store to db",
+  { priority: "high", concurrency: 1 },
+  async (job) =>
+    url.map(async (url) => {
+      try {
+        console.log("Fetching data from Polisen API...");
+        const response = await fetch(url);
+        const json = await response.json();
+        resultData = [...json];
+        for (let i = 0; i < resultData.length; i++) {
+          let incident = new IncidentModel({
+            datetime: resultData[i].datetime,
+            name: resultData[i].name,
+            summary: resultData[i].summary,
+            type: resultData[i].type,
+            location: {
+              name: resultData[i].location.name,
+              gps: resultData[i].location.gps,
+            },
+          });
 
-        IncidentModel.findOne({ datetime: incident.datetime }).then(
-          (existingIncident) => {
-            if (existingIncident) {
-            } else {
-              incident.save(() => {
-                console.log("saved" + incident);
-              });
+          IncidentModel.findOne({ datetime: incident.datetime }).then(
+            (existingIncident) => {
+              if (existingIncident) {
+              } else {
+                incident.save(() => {
+                  console.log("saved" + incident);
+                });
+              }
             }
-          }
-        );
+          );
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
-    }
-  })
+    })
 );
 
 (async function () {
