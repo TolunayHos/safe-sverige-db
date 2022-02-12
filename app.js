@@ -39,6 +39,8 @@ let resultData;
 const agenda = new Agenda({
   db: { address: process.env.DB_CONNECTION },
   processEvery: "30 seconds",
+  lockLimit: 1,
+  defaultConcurrency: 1,
 });
 
 agenda.define(
